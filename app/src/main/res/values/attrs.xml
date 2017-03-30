@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="fiveStar">
+        <attr name="starDistance" format="dimension"/>
+        <attr name="starSize" format="dimension"/>
+        <attr name="starCount" format="integer"/>
+        <attr name="emptyDraw" format="reference"/>
+        <attr name="fillDraw" format="reference"/>
+    </declare-styleable>
+</resources>
