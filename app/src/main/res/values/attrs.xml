@@ -7,4 +7,9 @@
         <attr name="emptyDraw" format="reference"/>
         <attr name="fillDraw" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="waveView">
+        <attr name="oneColor" format="color"/>
+        <attr name="twoColor" format="color"/>
+    </declare-styleable>
 </resources>

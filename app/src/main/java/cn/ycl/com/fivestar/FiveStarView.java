@@ -78,7 +78,7 @@ public class FiveStarView extends View{
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension((int) (starSize*starCount+starDistance*(starCount-1)),starSize);
+        setMeasuredDimension(starSize*starCount+starDistance*(starCount-1),starSize);
     }
 
     @Override
