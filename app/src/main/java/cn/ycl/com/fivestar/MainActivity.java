@@ -1,13 +1,18 @@
 package cn.ycl.com.fivestar;
 
+import android.animation.ObjectAnimator;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
+
+import static android.animation.ObjectAnimator.ofFloat;
 
 public class MainActivity extends AppCompatActivity {
     TextView tv;
+    WaveCircleView wcv;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -21,6 +26,16 @@ public class MainActivity extends AppCompatActivity {
         final FiveStarView fsv = (FiveStarView) findViewById(R.id.fsv);
         tv = (TextView) findViewById(R.id.tv);
         fsv.setIntMarkFlag(false);
+        wcv = (WaveCircleView) findViewById(R.id.wcv);
+        ofFloat(wcv,"distance",15.f,0.0f).setDuration(8000).start();
+        wcv.setListener(new WaveCircleView.OnClickListener() {
+            @Override
+            public void click() {
+                ObjectAnimator animator = ObjectAnimator.ofFloat(wcv,"distance",15.f,0.0f).setDuration(8000);
+                animator.setInterpolator(new DecelerateInterpolator());
+                animator.start();
+            }
+        });
         fsv.setListenner(new FiveStarView.OnstarChangeListenner() {
             @Override
             public void onchangerListener() {
