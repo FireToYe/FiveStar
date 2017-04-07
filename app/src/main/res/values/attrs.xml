@@ -12,4 +12,11 @@
         <attr name="oneColor" format="color"/>
         <attr name="twoColor" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="waweCircle">
+        <attr name="circleColor" format="reference|color"/>
+        <attr name="waveColor" format="reference|color"/>
+        <attr name="textColor" format="reference|color"/>
+        <attr name="textSize" format="reference|dimension"/>
+    </declare-styleable>
 </resources>

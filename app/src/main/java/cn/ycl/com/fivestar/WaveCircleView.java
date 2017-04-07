@@ -1,6 +1,7 @@
 package cn.ycl.com.fivestar;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -17,28 +18,42 @@ import android.view.View;
  */
 
 public class WaveCircleView extends View {
-    private String circleColor = "#88dddddd";//圆环颜色
-    private String  waveColor = "#4a90e2";//水波纹颜色
-    private final static int FIRST_LINE_SPEED = 4;
-    private final static int SECEND_LINE_SPEED = 5;
-    private static final float STRETCH_FACTOR_A = 15;
+//    private String circleColor = "#88dddddd";//圆环颜色
+//    private String  waveColor = "#4a90e2";//水波纹颜色
+    private int circleColor;//圆环颜色
+    private int waveColor;//水波纹颜色
+    private int textColor;//字体颜色
+    private int textSize;//字体大小
+    private final static int DEFAULT_SIZE = 20;//默认字体大小
+    private final static int FIRST_LINE_SPEED = 4;//第一条线移动速度
+    private final static int SECEND_LINE_SPEED = 5;//第二条线移动速度
+    private static final float STRETCH_FACTOR_A = 15;//
     private static final int OFFSET_Y = 0;
-    private int firstSpeedPx;
+    private int firstSpeedPx;//记录第一条线当前点的速度dp值
     private int secendSpeedPx;
     private int mOffset;
-    private float[] mOffsets;
-    private float[] mFirstOffsets;
+    private float[] mOffsets;//记录所有点的(x,y)
+    private float[] mFirstOffsets;//第一条线的(x,y)
     private float[] mSecendOffsets;
     private int percent=50;
-    private Paint mPaint;
-    private Paint mCirclePaint;
-    private Paint mTextPaint;
+    private Paint mPaint;//画水波纹线
+    private Paint mCirclePaint;//画圆的画笔
+    private Paint mTextPaint;//
     private Bitmap mBitMap;
     private Canvas mCanvas;
-    private int mWidth,mHeight;
-    private float cycle;
+    private int mWidth,mHeight;//view的宽高
+
+    public int getPercent() {
+        return percent;
+    }
+
+    public void setPercent(int percent) {
+        this.percent = percent;
+    }
+
+    private float cycle;//曲线周期
     private Context mContext;
-    private float distance;
+    private float distance;//曲线起伏程度大小
     private int mOneOffset;
     private int mTwoOffset;
     public OnClickListener listener;
@@ -59,20 +74,32 @@ public class WaveCircleView extends View {
     public WaveCircleView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
+        //获取自定义属性的值
+        TypedArray  a = context.obtainStyledAttributes(attrs,R.styleable.waweCircle);
+        circleColor = a.getColor(R.styleable.waweCircle_circleColor,Color.parseColor("#88dddddd"));
+        waveColor = a.getColor(R.styleable.waweCircle_waveColor,Color.parseColor("#4a90e2"));
+        textColor = a.getColor(R.styleable.waweCircle_textColor,Color.parseColor("#ffffff"));
+        textSize = a.getDimensionPixelSize(R.styleable.waweCircle_textSize,dp2px(DEFAULT_SIZE));
+        a.recycle();
+        //初始化画笔
         firstSpeedPx = dp2px(FIRST_LINE_SPEED);
         secendSpeedPx = dp2px(SECEND_LINE_SPEED);
         mBitMap = Bitmap.createBitmap(500,500, Bitmap.Config.ARGB_8888);
         mCanvas = new Canvas(mBitMap);
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mPaint.setColor(Color.parseColor(waveColor));
+        mPaint.setColor(waveColor);
+        //mPaint.setColor(Color.parseColor(waveColor));
         mCirclePaint = new Paint();
         mCirclePaint.setAntiAlias(true);
-        mCirclePaint.setColor(Color.parseColor(circleColor));
+        //mCirclePaint.setStyle(Paint.Style.STROKE);
+        mCirclePaint.setColor(circleColor);
+        //mCirclePaint.setColor(Color.parseColor(circleColor));
         mTextPaint = new Paint();
         mTextPaint.setAntiAlias(true);
     }
 
+    //定义view的大小 为wrap_content设置默认大小
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
@@ -138,7 +165,8 @@ public class WaveCircleView extends View {
             mTwoOffset = 0;
         }
         canvas.drawBitmap(mBitMap,0,0,null);
-        invalidate();
+        mTextPaint.setTextSize(textSize);
+        canvas.drawText(percent+"%",mWidth/2-textSize/2,mHeight/2+textSize/2,mTextPaint);
     }
 
     private void resetPositions() {
