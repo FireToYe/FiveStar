@@ -14,28 +14,28 @@
     <!--android:rating="0.1"-->
     <!--android:background="@color/transport"-->
     <!--/>-->
-    <!--<cn.ycl.com.fivestar.FiveStarView-->
-        <!--android:id="@+id/fsv"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:starCount = "5"-->
-        <!--app:emptyDraw ="@drawable/staroff"-->
-        <!--app:fillDraw = "@drawable/staron"-->
-        <!--app:starSize ="30dp"-->
-        <!--app:starDistance ="10dp"-->
-        <!--/>-->
-    <!--<TextView-->
-        <!--android:id="@+id/tv"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="20dp"-->
-        <!--android:textSize="14dp"-->
-        <!--/>-->
-    <!--<cn.ycl.com.fivestar.WaveCircleView-->
-        <!--android:id="@+id/wcv"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:waveColor ="#f41556"-->
-        <!--/>-->
+    <cn.ycl.com.fivestar.FiveStarView
+        android:id="@+id/fsv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:starCount = "5"
+        app:emptyDraw ="@drawable/staroff"
+        app:fillDraw = "@drawable/staron"
+        app:starSize ="30dp"
+        app:starDistance ="10dp"
+        />
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:textSize="14dp"
+        />
+    <cn.ycl.com.fivestar.WaveCircleView
+        android:id="@+id/wcv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:waveColor ="#f41556"
+        />
     <cn.ycl.com.fivestar.ColorView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
